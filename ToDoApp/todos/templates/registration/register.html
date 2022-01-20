@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://image.freepik.com/free-vector/bank-login-concept-illustration_114360-7964.jpg"
+                    class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form id="login-form" method="post">
+                    {% csrf_token %}
+                    <div class="form-outline mb-4">
+                        <label for="id_username" class="form-label">Username</label>
+                        {{form.username}}
+                    </div>
+                    {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="id_password">Password</label>
+                        {{form.password1}}
+                    </div>
+                    {% if form.password1.errors %}
+                    {% for error in form.password1.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="id_password">Confirm password</label>
+                        {{form.password2}}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                    <input type="hidden" name="next" value="{{ next }}" />
+
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
